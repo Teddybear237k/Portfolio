@@ -26,6 +26,20 @@
   --color-outline: #777682;
   --color-outline-variant: #c7c5d2;
 
+  /*
+    Spacing scale — base unit is 8px, every value below is a multiple of it
+    (8, 16, 24, 32, 80, 160). An 8px base is the common "8pt grid" convention:
+    it divides evenly into common screen widths/heights, every value lines up
+    with every other value with no fractional pixels, and it's small enough
+    to give fine control (an 8px step) without needing a huge token list.
+    Two tiers exist on purpose:
+      - stack-sm/md/lg (8/16/32) for spacing INSIDE a component (icon-to-label
+        gaps, card internal padding)
+      - gutter/edge-margin/section-gap (24/32/80/160) for spacing BETWEEN
+        components and page sections, which needs to read as clearly larger
+        than internal spacing so the eye can tell "this is a new section" vs
+        "this is still the same card"
+  */
   --space-mobile-margin: 16px;
   --space-edge-margin: 32px;
   --space-gutter: 24px;
@@ -41,17 +55,33 @@
   --radius-xl: 0.5rem;
   --radius-full: 0.75rem;
 
-  --fs-label-sm: 11px;
-  --fs-label-md: 12px;
-  --fs-body-sm: 14px;
-  --fs-body-md: 16px;
-  --fs-body-lg: 18px;
-  --fs-headline-md: 24px;
-  --fs-headline-lg-mobile: 28px;
-  --fs-headline-lg: 32px;
-  --fs-headline-xl: 48px;
-  --fs-display-mobile: 48px;
-  --fs-display: 72px;
+  /*
+    Type scale — values are in rem, not px, so they scale with the user's
+    browser/OS font-size preference (px is an absolute unit and ignores that
+    setting entirely; rem is relative to the root <html> font-size, which is
+    exactly the value a browser's "font size" accessibility setting changes).
+    1rem = 16px is the browser default, so this list is just each pixel
+    value below divided by 16.
+
+    Note: this is NOT a strict mathematical ratio (e.g. a consistent 1.25
+    "Major Third" step) — the jumps between steps vary (roughly 1.1x-1.5x)
+    because each size was picked for its specific use case (button label vs.
+    card title vs. hero headline) rather than generated formulaically. If you
+    want a provably consistent scale later, pick one ratio and regenerate
+    every step from the 1rem base — right now it's a hand-tuned scale that
+    happens to read as reasonably progressive, not a formula.
+  */
+  --fs-label-sm: 0.6875rem; /* 11px */
+  --fs-label-md: 0.75rem; /* 12px */
+  --fs-body-sm: 0.875rem; /* 14px */
+  --fs-body-md: 1rem; /* 16px — browser default */
+  --fs-body-lg: 1.125rem; /* 18px */
+  --fs-headline-md: 1.5rem; /* 24px */
+  --fs-headline-lg-mobile: 1.75rem; /* 28px */
+  --fs-headline-lg: 2rem; /* 32px */
+  --fs-headline-xl: 3rem; /* 48px */
+  --fs-display-mobile: 3rem; /* 48px */
+  --fs-display: 4.5rem; /* 72px */
 }
 
 /* 2. RESET / BASE */
@@ -180,6 +210,7 @@ html {
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
 }
 
+/* display: flex (not grid) because this is one-dimensional: logo, nav, and avatar just need to sit in a single row, vertically centered, with space distributed between them. Grid would work too, but would mean writing explicit grid-template-columns for 3 items that "justify-content: space-between" already solves without naming any tracks */
 .site-header__inner {
   height: 100%;
   display: flex;
@@ -247,7 +278,7 @@ html {
 
 .avatar .material-symbols-outlined {
   color: var(--color-on-primary);
-  font-size: 18px;
+  font-size: 1.125rem; /* 18px */
 }
 
 @media (min-width: 768px) {
@@ -414,6 +445,8 @@ html {
   display: flex;
   flex-direction: column;
   gap: 64px;
+  /* scroll-margin-top offsets anchor-jump landing by the fixed header's height (80px, see .site-header) — without this, clicking "Projects" in the nav (href="#work") scrolls the section title right underneath the fixed header instead of below it. */
+  scroll-margin-top: 80px;
 }
 
 @media (min-width: 1024px) {
@@ -451,6 +484,7 @@ html {
   max-width: 560px;
 }
 
+/* display: grid (not flex) because this is genuinely two-dimensional: cards need to align into both rows AND columns at once. Grid's explicit column tracks are what make that span reliable. */
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -535,7 +569,7 @@ html {
 }
 
 .project-card__title {
-  font-size: 20px;
+  font-size: 1.25rem; /* 20px */
   font-weight: 600;
 }
 
@@ -586,9 +620,7 @@ html {
   background-color: var(--color-primary-container);
 }
 
-/* Fallback for browsers without scroll-driven animation support
-           (animation-timeline): show everything immediately instead of
-           leaving it stuck at opacity: 0. */
+/* Fallback for browsers without scroll-driven animation support(animation-timeline): show everything immediately instead of leaving it stuck at opacity: 0. */
 @supports not (animation-timeline: view()) {
   .section-intro,
   .project-card {
@@ -604,6 +636,7 @@ html {
   background-color: var(--color-surface-container-low);
   padding: var(--space-section-gap) var(--space-edge-margin);
   margin-top: 64px;
+  scroll-margin-top: 80px;
 }
 
 @media (min-width: 1024px) {
@@ -624,13 +657,13 @@ html {
 }
 
 .cta-title {
-  font-size: 40px;
+  font-size: 2.5rem; /* 40px */
   font-weight: 800;
 }
 
 @media (min-width: 768px) {
   .cta-title {
-    font-size: 56px;
+    font-size: 3.5rem; /* 56px */
   }
 }
 
