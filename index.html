@@ -2,305 +2,274 @@
 <html lang="en">
 
 <head>
-    <link rel="icon"
-        href="https://lh3.googleusercontent.com/aida/AP1WRLvCxpFyrDMS1FfZwcXZzYg7DSD5jt7yyzdNbCYKlSGp5vs82YBmZfXmm2WDHP4xi3ceeYKQToAmCT9DsX_o0irWI_WXaHmUjgcbHxFWSu2TPLOpPjzCOmzaFyIm94_M7NybpNJs3ejdvKCpNSNNPR0r0V4cgOjHIQV_LHkjftFvHe1Qi09XZwadbXRCiUfmrfS_uurkTkbPeGuyjGCPiK1AUF-W5V6XdgnuVIPX4rl-PmiF3FPEolBBFA"
-        type="image/png">
-    <link rel="apple-touch-icon"
-        href="https://lh3.googleusercontent.com/aida/AP1WRLtUsxEIig2Yh9EZoA1PW9TPGy7KJnMbCLeJziqLnLWzxbhdRSLMRJaGRkNbNfMvE5qw9lxjm9ErVyjxyYtu3bW3RIY13NL6hcYs0dWuAgaPX_LGOCdmlkStpHpx1KhaA1F9HD-_q5jWsF1_GaQFPTWNiNO_HUI8R-rg-_bo0ndCW3LQwpuog2wHXJY6Tq7x7e6Y8pBXLczycRQJ98KnogAJxJ7c_3i2MqDmMj_QAC1o1n8ciNQ0Fn31ANA">
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@600;700;800&amp;family=Geist:wght@500&amp;display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ndzana Teddy — Frontend Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet">
+
+
 </head>
 
 <body>
     <header class="site-header">
-        <div class="header-inner">
-            <a class="logo" href="#">Ndzana Teddy</a>
+        <div class="site-header__inner container">
+            <div class="brand">
+                <img class="brand__logo" alt="Favicon for Ndzana Teddy's portfolio."
+                    src="https://lh3.googleusercontent.com/aida/AP1WRLvCxpFyrDMS1FfZwcXZzYg7DSD5jt7yyzdNbCYKlSGp5vs82YBmZfXmm2WDHP4xi3ceeYKQToAmCT9DsX_o0irWI_WXaHmUjgcbHxFWSu2TPLOpPjzCOmzaFyIm94_M7NybpNJs3ejdvKCpNSNNPR0r0V4cgOjHIQV_LHkjftFvHe1Qi09XZwadbXRCiUfmrfS_uurkTkbPeGuyjGCPiK1AUF-W5V6XdgnuVIPX4rl-PmiF3FPEolBBFA" />
+                <span class="brand__name">Ndzana Teddy</span>
+            </div>
             <nav class="nav">
-                <a class="nav-link" href="#projects">Projects</a>
-                <a class="nav-link" href="#contact">Contact</a>
-                <div class="avatar"><span class="material-symbols-outlined">person</span></div>
+                <a class="nav__link nav__link--active" href="#" aria-current="page">Intro</a>
+                <a class="nav__link" href="#work">Projects</a>
+                <a class="nav__link" href="#contact">Contact</a>
             </nav>
+            <div class="header-actions">
+                <div class="avatar">
+                    <span class="material-symbols-outlined">person</span>
+                </div>
+            </div>
         </div>
     </header>
-    <main class="site-main">
-        <div class="page-flow">
-            <!-- Ambient Background -->
-            <div class="ambient-bg">
-                <div class="blob blob-one"></div>
-                <div class="blob blob-two"></div>
-            </div>
-            <!-- Hero Section -->
-            <section class="hero hero-anim">
-                <div class="hero-badge">
-                    <div class="hero-badge-line"></div>
-                    <span class="hero-badge-text">Ndzana Teddy</span>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero__content">
+                <div class="badge">
+                    <span class="badge__dot"></span>
+                    <span class="badge__label">Available for new opportunities</span>
                 </div>
-                <h1 class="hero-title">
-                    Frontend Developer.
-                </h1>
-                <p class="hero-subtitle">
-                    "Still learning, but moving." <br>
-                    <span class="hero-subtitle-detail">
-                        I engineer beautiful, highly functional web experiences. Passionate about translating complex
-                        problems into elegant, tactile user interfaces through disciplined code and pixel-perfect
-                        design.
-                    </span>
+                <h1 class="hero__title">Frontend Developer</h1>
+                <p class="hero__lede">
+                    Still learning, but moving. Building digital experiences during my internship with a focus on
+                    precision, performance, and refined aesthetics.
                 </p>
-                <div class="hero-actions">
-                    <a class="btn btn-primary btn-shine" href="#projects">
-                        View Projects
-                        <span class="material-symbols-outlined btn-icon">arrow_forward</span>
+                <div class="hero__actions">
+                    <a class="btn btn--primary" href="#work">View Work</a>
+                    <a class="btn btn--secondary" href="#contact">Let's Build</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Work Section -->
+        <section class="work-section" id="work">
+            <div class="section-intro">
+                <h2 class="section-intro__title">Selected Work</h2>
+                <p class="section-intro__body">
+                    A curated collection of projects demonstrating expertise in frontend architecture, UI
+                    engineering, and interaction design.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Data Dashboard Project" src="img/dashboard.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Data Dashboard</h3>
+                        <p class="project-card__desc">Complex data visualization and analytics interface.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Dashboard/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Dashboard/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Component Library Project" src="img/library.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Component Library</h3>
+                        <p class="project-card__desc">A component library page. Buttons in three variants (primary,
+                            secondary, ghost) and three
+                            sizes. Text input, textarea, select, checkbox, radio, toggle switch. Badge. Tooltip</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Component-library/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Component-library/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Sunnyside Agency Project" src="img/sunnyside.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Sunnyside Agency</h3>
+                        <p class="project-card__desc">Creative agency landing page.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Sunnyside/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Sunnyside/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Card Gallery Project" src="img/gallery.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Card Gallery</h3>
+                        <p class="project-card__desc">Interactive component showcase.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Card-gallery/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Card-Gallery/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Four Card Feature Project" src="img/fourcard.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Four Card Feature</h3>
+                        <p class="project-card__desc">Layout pattern implementation.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code" href="https://github.com/Teddybear237k/FourCard/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/FourCard/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Loopstudios Project" src="img/loopstudios.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Loopstudios</h3>
+                        <p class="project-card__desc">Immersive VR studio landing page.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Loopstudios/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Loopstudios/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Testimonials Grid Project" src="img/testimonial.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Testimonials Grid</h3>
+                        <p class="project-card__desc">Complex masonry layout.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Testimonial/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Testimonial/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Fylo Project" src="img/fylo.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Fylo</h3>
+                        <p class="project-card__desc">Cloud storage landing page with dark mode.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Dark-theme/tree/development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Dark-theme/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Product Preview Project" src="img/product.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Product Preview</h3>
+                        <p class="project-card__desc">E-commerce component.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Product-preview-card/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Product-preview-card/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-card__thumb">
+                        <img alt="Price Grid Project" src="img/singleprice.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Price Grid</h3>
+                        <p class="project-card__desc">SaaS pricing structure.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/Single-price-grid/tree/Development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/Single-price-grid/">Live</a>
+                    </div>
+                </article>
+
+                <article class="project-card project-card--wide">
+                    <div class="project-card__thumb">
+                        <img alt="Bookmark Project" src="img/bookmark.png" />
+                    </div>
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">Bookmark</h3>
+                        <p class="project-card__desc">Full landing page implementation.</p>
+                    </div>
+                    <div class="project-card__links">
+                        <a class="link--code"
+                            href="https://github.com/Teddybear237k/bookmark-landing/tree/development">Code</a>
+                        <a class="link--live" href="https://teddybear237k.github.io/bookmark-landing/">Live</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" id="contact">
+            <div class="cta-inner">
+                <h2 class="cta-title">Let's Build.</h2>
+                <p class="cta-lede">
+                    Open for collaborations and interesting projects. Feel free to reach out.
+                </p>
+                <div class="contact-links">
+                    <a class="contact-link" href="mailto:tddmodo@gmail.com">
+                        <span class="material-symbols-outlined">mail</span>
+                        <span class="contact-link__label">tddmodo@gmail.com</span>
                     </a>
-                    <a class="btn btn-outline" href="#contact">
-                        Contact Me
+                    <a class="contact-link" href="https://github.com/Teddybear237k" target="_blank"
+                        rel="noopener noreferrer">
+                        <span class="material-symbols-outlined">code</span>
+                        <span class="contact-link__label">Github</span>
                     </a>
                 </div>
-            </section>
-            <!-- Projects Section -->
-            <section class="projects-section" id="projects">
-                <div class="projects-header">
-                    <div>
-                        <h2 class="projects-title">Selected Work</h2>
-                        <p class="projects-desc">A collection of recent frontend challenges and landing pages.</p>
-                    </div>
-                    <div class="projects-count">
-                        <span class="projects-count-dot"></span> 11 Projects
-                    </div>
-                </div>
-                <div class="projects-grid">
-                    <!-- Project 1: Four Card Feature -->
-                    <article class="project-card project-card--tall">
-                        <div class="project-image-wrap">
-                            <div class="project-image-overlay"></div>
-                            <img class="project-image"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6MPkhoCwT6vtQ_PgH2BtdKPB9tCTEidGqLCov0qEsaW3xN4BxmP2a0pFpslI6Y9hJWI7mNZvCQlQB8G7c7iUp1EQYKksxZm6KRlfzBceVLbjv42SdkRgGDVqSLHypiFbi0P-DQr3ANTZpLmceUH2rKYAGCmSxHWgOO3zBuN0p8t-F3Gv3QyJ-s8cvMrsWY4YzImgm1QImz4i_fqh7mY3uaT_Q-xSNrKPmq4xXu2W4GuZVQi0RoSbR"
-                                alt="Four Card Feature">
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Four Card Feature</h3>
-                            <p class="project-desc">Advanced CSS Grid placement and structural styling.</p>
-                            <div class="project-links">
-                                <a class="project-link"
-                                    href="https://github.com/Teddybear237k/FourCard/tree/Development" target="_blank"
-                                    rel="noopener noreferrer">Code</a>
-                                <a class="project-link" href="https://teddybear237k.github.io/FourCard/" target="_blank"
-                                    rel="noopener noreferrer">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 2: Testimonials Grid -->
-                    <article class="project-card project-card--tall">
-                        <div class="project-image-wrap">
-                            <div class="project-image-overlay"></div>
-                            <img class="project-image"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1JkBHVRcL3mP2r0MnD64HVcs_tTtBb9jFJesCeIrCtj9pboMnL0hfmYgv1N2adjV59NC6DTlMNQmLFuXpWrVf0C4O1XTL1gWPqy1kmmeadwFcJRYrV3yYUD5EIwJoWCicaSdeTkuYrRos1HwE5c2Ksm7b5hUS67DImu0ygSPlvL1-VGzF8mCliGFbdXEdkVXYUrmqVeLyovRn9B27oJyjDOYOw2QbuqWpM-ejHnI0dr8GCq90srZw"
-                                alt="Testimonials Grid">
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Testimonials Grid</h3>
-                            <p class="project-desc">Bento-style grid with rigorous responsive breakpoints.</p>
-                            <div class="project-links">
-                                <a class="project-link" href="#">Code</a>
-                                <a class="project-link" href="#">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 3: Fylo -->
-                    <article class="project-card project-card--wide">
-                        <div class="project-card-split">
-                            <div class="project-image-wrap">
-                                <img class="project-image"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGs9qNLvkMoW3cDMXfd7fqEeoPsQZxDfbWxAYoh_15SOR0y0iQ2FK5NnQUH2jwSJr95UmacD5nNPuMeAaXDv4Vcjj0NDaPb0sU_w1oOvX3tQg1RaYTTguatudIK5PApR5K5SxRJrsdO8FXQknJWkuj6aWuDH59Ur814xII90-DfUVs8F2wRKkCH_xPbwB6Vuhvwxi6wgcoaw5QjBbJEzsaiN_v71iWUPpaJhquTwFGLaahned0pOrr"
-                                    alt="Fylo">
-                            </div>
-                            <div class="project-body">
-                                <h3 class="project-title">Fylo Landing Page</h3>
-                                <p class="project-desc">Full-page dark theme with custom form validation.</p>
-                                <div class="project-links">
-                                    <a class="project-link" href="#">Code</a>
-                                    <a class="project-link" href="#">Live</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 4: Loopstudios -->
-                    <article class="project-card">
-                        <div class="project-image-wrap">
-                            <img class="project-image"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf8ielgYC3rwz6TcCAfs_yhwDB4PwTO_lsoJRc9MIsiVwslh4ctPRqBYq8Zn0jdSeWeiTIpj0hwBsTrlCO4kmQ8METXTlFbvMN81UEFD-F9RigsD_g06uvTsMGUDP0H_ZUqJrikx0gkg2p8UqzfAFA9uy868NOHcgiBU4Gm6w3x8OPF4XmZFPPe1i47lUn2k5vmnshmpftAc8WbCcEx2v-OcgQv03YObFWPbGhIrGMHVo7wz89sTyw"
-                                alt="Loopstudios">
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Loopstudios</h3>
-                            <p class="project-desc">Interactive VR studio page with complex hover states.</p>
-                            <div class="project-links">
-                                <a class="project-link" href="#">Code</a>
-                                <a class="project-link" href="#">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 5: Single Price Grid -->
-                    <article class="project-card">
-                        <div class="project-image-wrap">
-                            <img class="project-image"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmJ9XnNudXmiMV5MJWps_ZkY7W2fP99pReX62xtJb8Ut4aMQlvdL13UggrFFExwjF6_2MYxQrrDZmxg6tAr2Vos7lVBrHYneSc0uY4zD6ToLeSdgnWuhO-Ff_F636Swt8VcHdQRhEMHB6Yoz6ppHpfYUgr21p6TQZ6b0sB5GEjmMUa8yEeXITpaU3oWuPNM6KGeq4TBHBK4X6435MmMpHCl7MnAVn4_qS1HF_8eKUR_He9_ADkx4K-"
-                                alt="Single Price Grid">
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Single Price Grid</h3>
-                            <p class="project-desc">Precise padding and hierarchy in a pricing card.</p>
-                            <div class="project-links">
-                                <a class="project-link" href="#">Code</a>
-                                <a class="project-link" href="#">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 6: Product Preview Card -->
-                    <article class="project-card">
-                        <div class="project-image-wrap">
-                            <img class="project-image"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5TjQ4UzSz9ILwg1P1OVMZ1RJqfd8gfFYHEymXpyJoKa6_A1t9bBSfRXyuw_hiFdQWCRjbrBt6e6W_f2OnjoIV4LPtj3whECXVKwr50m-Lr5bvTDn8PqRF2gUV40mFJ-lcq5hWc8TG6KJwkSaI1xk7ZR0pamodt5vUMUUivHiN148KffkCvCiOpR1fInUro4frKGC7-UkvpYJw6-Owur-QQue1-9aS8yn3lL1veOLP9-JGyZKiQkED"
-                                alt="Product Preview Card">
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Product Preview Card</h3>
-                            <p class="project-desc">E-commerce card focused on typography and scaling.</p>
-                            <div class="project-links">
-                                <a class="project-link" href="#">Code</a>
-                                <a class="project-link" href="#">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 7: Bookmark Landing -->
-                    <article class="project-card">
-                        <div class="project-image-wrap">
-                            <img class="project-image"
-                                src="https://lh3.googleusercontent.com/aida/AP1WRLvVm8s-v2feo0sj9DAGMyUvwPcZLpJvQfInGvo-cqP9Rnlk39rGLD8PvtEjEniEhT-YXbP5oSzPVonOe2JIz0yn8G98flQVuA9thhcA0FsE44NzVBaEY4_nfsxygNWmPK-YkOnrjAMG8aZ9ca1SeoJaHbwnQ3Wl38zROloC6Sw5U7VimbummJLwP_Eux-GNfZzOll41gieOSQ8ztNvoYBE12yie81Q_4jN7OxwsrSuZV7l0bfRiQCetRKo"
-                                alt="Bookmark Landing">
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Bookmark Landing</h3>
-                            <p class="project-desc">Multi-section landing page with stateful tabs.</p>
-                            <div class="project-links">
-                                <a class="project-link" href="#">Code</a>
-                                <a class="project-link" href="#">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 8: Dashboard -->
-                    <article class="project-card project-card--wide">
-                        <div class="project-card-split">
-                            <div class="project-image-wrap">
-                                <img class="project-image"
-                                    src="https://lh3.googleusercontent.com/aida/AP1WRLvDzTq6AtEthxuIAxUwkWkXDwsGcTFwupeG7SFrOhZBLZ8DIbZc2kVhSEPSp-CIkVK_tMrzSyU9z6Coo046t-bsSyZkZyGYTPE0dnIwiO8d8iBzJIjs22Wx13-Jpm8ABl7VnGUNvdmXrCk5sNY4j1g9ri584z41BuLDp7aO-wT60Iod6Ehhp2aPQ3BefZ1gj9mwb5NxGG1qW9tZjGD4i7LQ7C7RV882VQhoqefI9nrxLpbIqHpko0pgtw"
-                                    alt="Dashboard">
-                            </div>
-                            <div class="project-body">
-                                <h3 class="project-title">Analytics Dashboard</h3>
-                                <p class="project-desc">Sleek, dark-themed dashboard with modern visualizations.</p>
-                                <div class="project-links">
-                                    <a class="project-link" href="#">Code</a>
-                                    <a class="project-link" href="#">Live</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 9: Components Library -->
-                    <article class="project-card">
-                        <div class="project-image-wrap">
-                            <div class="project-icon-wrap"><span
-                                    class="material-symbols-outlined project-icon">widgets</span></div>
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Components Library</h3>
-                            <p class="project-desc">A collection of reusable, accessible UI components.</p>
-                            <div class="project-links">
-                                <a class="project-link" href="#">Code</a>
-                                <a class="project-link" href="#">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 10: Sunnyside Agency -->
-                    <article class="project-card">
-                        <div class="project-image-wrap">
-                            <div class="project-icon-wrap"><span
-                                    class="material-symbols-outlined project-icon">lightbulb</span></div>
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Sunnyside Agency</h3>
-                            <p class="project-desc">Creative agency landing page with vibrant layouts.</p>
-                            <div class="project-links">
-                                <a class="project-link" href="#">Code</a>
-                                <a class="project-link" href="#">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- Project 11: Card Gallery -->
-                    <article class="project-card">
-                        <div class="project-image-wrap">
-                            <div class="project-icon-wrap"><span
-                                    class="material-symbols-outlined project-icon">grid_view</span></div>
-                        </div>
-                        <div class="project-body">
-                            <h3 class="project-title">Card Gallery</h3>
-                            <p class="project-desc">A showcase of various card designs and interactions.</p>
-                            <div class="project-links">
-                                <a class="project-link" href="#">Code</a>
-                                <a class="project-link" href="#">Live</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-            <!-- Contact Section -->
-            <section class="contact-section" id="contact">
-                <div class="contact-blob"></div>
-                <div class="contact-inner">
-                    <h2 class="contact-title">Let's build.</h2>
-                    <p class="contact-desc">
-                        Whether you have a specific project in mind or just want to chat about architecture and frontend
-                        systems, I'm always open to connecting.
-                    </p>
-                    <div class="contact-actions">
-                        <a class="btn btn-primary btn-shine" href="mailto:tddmodo@gmail.com">
-                            <span class="material-symbols-outlined">mail</span>
-                            <span>Email Me</span>
-                        </a>
-                        <a class="btn btn-outline" href="https://github.com/Teddybear237k" rel="noopener noreferrer"
-                            target="_blank">
-                            <span class="material-symbols-outlined">code</span>
-                            <span>GitHub Profile</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </section>
+
+        <div class="signature-strip">
+            <p>Ndzana Teddy | Second-year Student &amp; Frontend Intern</p>
+            <p class="signature-strip__note">Thanks for visiting</p>
         </div>
     </main>
-    <a id="back-to-top" href="#" aria-label="Back to top">
-        <span class="material-symbols-outlined">arrow_upward</span>
-    </a>
+
     <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-name">Ndzana Teddy</div>
-            <div class="footer-role">Senior Software Engineer &amp; Architect</div>
-            <div class="footer-thanks">Thanks for visiting.</div>
-            <div class="footer-links">
-                <a class="footer-link" href="https://github.com/Teddybear237k" target="_blank"
-                    rel="noopener noreferrer"><span class="material-symbols-outlined">code</span><span>GitHub</span></a>
-                <a class="footer-link" href="mailto:tddmodo@gmail.com"><span
-                        class="material-symbols-outlined">mail</span><span>Email</span></a>
+        <div class="site-footer__inner">
+            <div class="site-footer__copy">© 2026 Ndzana Teddy</div>
+            <div class="site-footer__links">
+                <a href="https://www.linkedin.com/in/teddy-ndzana-576342393/">LinkedIn</a>
+                <a href="https://github.com/Teddybear237k">GitHub</a>
             </div>
-            <div class="footer-copy">© 2026 Ndzana Teddy. Crafted with precision.</div>
         </div>
     </footer>
 </body>
