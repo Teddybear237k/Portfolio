@@ -52,6 +52,12 @@
   --fs-headline-xl: 3rem; /* 48px */
   --fs-display-mobile: 3rem; /* 48px */
   --fs-display: 4.5rem; /* 72px */
+
+  /* Baseline header height. It's a min-height now, not a fixed height —
+     at large browser zoom (e.g. 200%) the effective CSS viewport shrinks
+     and the brand/nav/avatar row can need more room than this, so the
+     header is allowed to grow past it instead of clipping content. */
+  --header-height: 80px;
 }
 
 /* 2. RESET / BASE */
@@ -94,11 +100,6 @@ button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
   border-radius: var(--radius-lg);
-}
-
-/* Hide scrollbars visually while keeping the page scrollable — purely an aesthetic choice carried over from the original design. */
-::-webkit-scrollbar {
-  display: none;
 }
 
 main > *:first-child {
@@ -180,43 +181,57 @@ html {
   left: 0;
   right: 0;
   z-index: 50;
-  height: 80px;
+  min-height: var(--header-height);
   background-color: rgba(249, 249, 249, 0.8);
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* display: flex (not grid) because this is one-dimensional: logo, nav, and avatar just need to sit in a single row, vertically centered, with space distributed between them. Grid would work too, but would mean writing explicit grid-template-columns for 3 items that "justify-content: space-between" already solves without naming any tracks */
+/* display: flex (not grid) because this is one-dimensional: logo, nav, and avatar just need to sit in a single row, vertically centered, with space distributed between them. Grid would work too, but would mean writing explicit grid-template-columns for 3 items that "justify-content: space-between" already solves without naming any tracks.
+   flex-wrap: wrap is the overflow safety net — at large browser zoom the
+   effective CSS viewport shrinks and brand + nav + avatar can no longer
+   share one row; wrapping to a second line keeps everything on-screen
+   instead of pushing it off the right edge and causing horizontal scroll. */
 .site-header__inner {
-  height: 100%;
+  min-height: var(--header-height);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  row-gap: var(--space-stack-sm);
+  padding-block: var(--space-stack-sm);
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: var(--space-stack-md);
+  min-width: 0;
 }
 
 .brand__logo {
   height: 32px;
   width: auto;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .brand__name {
-  font-size: var(--fs-headline-md);
+  /* clamp() lets the name shrink smoothly on narrow effective viewports
+     (small screens, or a desktop browser zoomed to 200%) instead of
+     holding a fixed 24px and forcing the row to overflow. */
+  font-size: clamp(1rem, 0.85rem + 1vw, var(--fs-headline-md));
   font-weight: 600;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .nav {
   display: none;
   align-items: center;
   gap: var(--space-gutter);
+  flex-wrap: wrap;
 }
 
 .nav__link {
@@ -267,7 +282,7 @@ html {
 /* HERO SECTION*/
 .main-content {
   width: 100%;
-  padding-top: 80px;
+  padding-top: var(--header-height);
   /* clears the fixed header */
   min-height: 100vh;
 }
@@ -422,8 +437,8 @@ html {
   display: flex;
   flex-direction: column;
   gap: 64px;
-  /* scroll-margin-top offsets anchor-jump landing by the fixed header's height (80px, see .site-header) — without this, clicking "Projects" in the nav (href="#work") scrolls the section title right underneath the fixed header instead of below it. */
-  scroll-margin-top: 80px;
+  /* scroll-margin-top offsets anchor-jump landing by the fixed header's height (see --header-height / .site-header) — without this, clicking "Projects" in the nav (href="#work") scrolls the section title right underneath the fixed header instead of below it. */
+  scroll-margin-top: var(--header-height);
 }
 
 @media (min-width: 1024px) {
@@ -613,7 +628,7 @@ html {
   background-color: var(--color-surface-container-low);
   padding: var(--space-section-gap) var(--space-edge-margin);
   margin-top: 64px;
-  scroll-margin-top: 80px;
+  scroll-margin-top: var(--header-height);
 }
 
 @media (min-width: 1024px) {
