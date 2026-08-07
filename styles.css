@@ -1,0 +1,793 @@
+:root {
+  --color-primary: #161664;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #2d2f7a;
+  --color-on-primary-container: #989aec;
+
+  --color-secondary: #5153b4;
+  --color-on-secondary: #ffffff;
+
+  --color-tertiary: #3c1a00;
+  --color-on-tertiary-container: #da915e;
+
+  --color-error: #ba1a1a;
+
+  --color-background: #f9f9f9;
+  --color-surface: #f9f9f9;
+  --color-on-surface: #1a1c1c;
+  --color-on-surface-variant: #464651;
+
+  --color-surface-container: #eeeeee;
+  --color-surface-container-low: #f4f3f3;
+  --color-surface-container-high: #e8e8e8;
+  --color-surface-container-highest: #e2e2e2;
+  --color-surface-container-lowest: #ffffff;
+
+  --color-outline: #777682;
+  --color-outline-variant: #c7c5d2;
+
+  --space-mobile-margin: 16px;
+  --space-edge-margin: 32px;
+  --space-gutter: 24px;
+  --space-stack-sm: 8px;
+  --space-stack-md: 16px;
+  --space-stack-lg: 32px;
+  --space-section-gap: 80px;
+  --space-section-gap-desktop: 160px;
+  --container-max-width: 1200px;
+
+  --radius-default: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  --fs-label-sm: 0.6875rem; /* 11px */
+  --fs-label-md: 0.75rem; /* 12px */
+  --fs-body-sm: 0.875rem; /* 14px */
+  --fs-body-md: 1rem; /* 16px — browser default */
+  --fs-body-lg: 1.125rem; /* 18px */
+  --fs-headline-md: 1.5rem; /* 24px */
+  --fs-headline-lg-mobile: 1.75rem; /* 28px */
+  --fs-headline-lg: 2rem; /* 32px */
+  --fs-headline-xl: 3rem; /* 48px */
+  --fs-display-mobile: 3rem; /* 48px */
+  --fs-display: 4.5rem; /* 72px */
+
+  /* Baseline header height. It's a min-height now, not a fixed height —
+     at large browser zoom (e.g. 200%) the effective CSS viewport shrinks
+     and the brand/nav/avatar row can need more room than this, so the
+     header is allowed to grow past it instead of clipping content. */
+  --header-height: 80px;
+}
+
+/* 2. RESET / BASE */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* overscroll-behavior: none stops the "bounce"/pull-to-refresh chain on mobile from also scrolling a parent page behind this one. */
+  overscroll-behavior: none;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: "Inter", sans-serif;
+  font-size: var(--fs-body-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-lg);
+}
+
+main > *:first-child {
+  margin-top: 0;
+}
+
+main > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Every animation in this file is wrapped so it can be neutralized here. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ANIMATION KEYFRAMES */
+
+/* Gentle pulse for the "available for work" status dot in the hero. */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Simple fade + rise used to bring hero content and section headers in on load, so the page doesn't feel static/instant. */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up-scroll {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* LAYOUT */
+.container {
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-edge-margin);
+  padding-right: var(--space-edge-margin);
+}
+
+/* HEADER / NAV */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  min-height: var(--header-height);
+  background-color: rgba(249, 249, 249, 0.8);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* display: flex (not grid) because this is one-dimensional: logo, nav, and avatar just need to sit in a single row, vertically centered, with space distributed between them. Grid would work too, but would mean writing explicit grid-template-columns for 3 items that "justify-content: space-between" already solves without naming any tracks.
+   flex-wrap: wrap is the overflow safety net — at large browser zoom the
+   effective CSS viewport shrinks and brand + nav + avatar can no longer
+   share one row; wrapping to a second line keeps everything on-screen
+   instead of pushing it off the right edge and causing horizontal scroll. */
+.site-header__inner {
+  min-height: var(--header-height);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: var(--space-stack-sm);
+  padding-block: var(--space-stack-sm);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-stack-md);
+  min-width: 0;
+}
+
+.brand__logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand__name {
+  /* clamp() lets the name shrink smoothly on narrow effective viewports
+     (small screens, or a desktop browser zoomed to 200%) instead of
+     holding a fixed 24px and forcing the row to overflow. */
+  font-size: clamp(1rem, 0.85rem + 1vw, var(--fs-headline-md));
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: var(--space-gutter);
+  flex-wrap: wrap;
+}
+
+.nav__link {
+  font-size: var(--fs-label-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-on-surface-variant);
+  transition: color 0.2s ease;
+}
+
+.nav__link:hover {
+  color: var(--color-on-surface);
+}
+
+.nav__link--active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-stack-md);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar .material-symbols-outlined {
+  color: var(--color-on-primary);
+  font-size: 1.125rem; /* 18px */
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+}
+
+/* HERO SECTION*/
+.main-content {
+  width: 100%;
+  padding-top: var(--header-height);
+  /* clears the fixed header */
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-section-gap) var(--space-edge-margin);
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding-top: var(--space-section-gap-desktop);
+    padding-bottom: var(--space-section-gap-desktop);
+  }
+}
+
+/* Soft radial glow behind the hero copy */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(232, 232, 232, 0.3) 0%,
+    var(--color-surface) 60%,
+    var(--color-surface) 100%
+  );
+}
+
+.hero__content {
+  max-width: var(--container-max-width);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-stack-md);
+  position: relative;
+  z-index: 1;
+  /* Bring the hero content in on page load. */
+  animation: fade-in-up 0.7s ease-out both;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-stack-sm);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(199, 197, 210, 0.3);
+  background-color: rgba(238, 238, 238, 0.5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  margin-bottom: var(--space-stack-md);
+}
+
+.badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.badge__label {
+  font-size: var(--fs-label-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-on-surface-variant);
+}
+
+.hero__title {
+  font-size: var(--fs-display-mobile);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  max-width: 800px;
+}
+
+@media (min-width: 768px) {
+  .hero__title {
+    font-size: var(--fs-display);
+  }
+}
+
+.hero__lede {
+  font-size: var(--fs-body-lg);
+  color: var(--color-on-surface-variant);
+  max-width: 640px;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-stack-md);
+  margin-top: var(--space-stack-lg);
+}
+
+.btn {
+  padding: 16px 32px;
+  font-size: var(--fs-label-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-default);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-container);
+}
+
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-primary);
+}
+
+/* WORK / PROJECTS SECTION */
+.work-section {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--space-section-gap) var(--space-edge-margin);
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  /* scroll-margin-top offsets anchor-jump landing by the fixed header's height (see --header-height / .site-header) — without this, clicking "Projects" in the nav (href="#work") scrolls the section title right underneath the fixed header instead of below it. */
+  scroll-margin-top: var(--header-height);
+}
+
+@media (min-width: 1024px) {
+  .work-section {
+    padding-top: var(--space-section-gap-desktop);
+    padding-bottom: var(--space-section-gap-desktop);
+  }
+}
+
+.section-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-stack-md);
+  /* Fade the section header in as it scrolls into view. */
+  opacity: 0;
+  animation: fade-in-up-scroll 0.6s ease-out forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 25%;
+}
+
+.section-intro__title {
+  font-size: var(--fs-headline-lg-mobile);
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .section-intro__title {
+    font-size: var(--fs-headline-lg);
+  }
+}
+
+.section-intro__body {
+  font-size: var(--fs-body-md);
+  color: var(--color-on-surface-variant);
+  max-width: 560px;
+}
+
+/* display: grid (not flex) because this is genuinely two-dimensional: cards need to align into both rows AND columns at once. Grid's explicit column tracks are what make that span reliable. */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-stack-lg);
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-stack-md);
+  padding: var(--space-stack-md);
+  border-radius: var(--radius-xl);
+  background-color: var(--color-surface-container);
+  border: 1px solid rgba(199, 197, 210, 0.1);
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  /* Cards fade/rise in as they scroll into view, staggered slightly per card via nth-child below so they don't all pop at once. */
+  opacity: 0;
+  animation: fade-in-up-scroll 0.6s ease-out forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+.project-card:hover {
+  border-color: rgba(199, 197, 210, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.project-card--wide {
+  grid-column: span 1;
+}
+
+@media (min-width: 1024px) {
+  .project-card--wide {
+    grid-column: span 2;
+  }
+}
+
+.project-card__thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-surface-container-highest);
+}
+
+.project-card--wide .project-card__thumb {
+  aspect-ratio: 2 / 1;
+}
+
+.project-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-card__thumb img {
+  transform: scale(1.05);
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-stack-sm);
+}
+
+.project-card__title {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+}
+
+.project-card__desc {
+  font-size: var(--fs-body-sm);
+  color: var(--color-on-surface-variant);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-card__links {
+  display: flex;
+  gap: var(--space-stack-sm);
+  margin-top: auto;
+  padding-top: var(--space-stack-sm);
+}
+
+.project-card__links a {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  font-size: var(--fs-label-sm);
+  text-transform: uppercase;
+  border-radius: var(--radius-default);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.link--code {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  border: 1px solid rgba(199, 197, 210, 0.3);
+}
+
+.link--code:hover {
+  border-color: var(--color-primary);
+}
+
+.link--live {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.link--live:hover {
+  background-color: var(--color-primary-container);
+}
+
+/* Fallback for browsers without scroll-driven animation support(animation-timeline): show everything immediately instead of leaving it stuck at opacity: 0. */
+@supports not (animation-timeline: view()) {
+  .section-intro,
+  .project-card {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* CTA / CONTACT SECTION */
+.cta-section {
+  width: 100%;
+  border-top: 1px solid rgba(199, 197, 210, 0.1);
+  background-color: var(--color-surface-container-low);
+  padding: var(--space-section-gap) var(--space-edge-margin);
+  margin-top: 64px;
+  scroll-margin-top: var(--header-height);
+}
+
+@media (min-width: 1024px) {
+  .cta-section {
+    padding-top: var(--space-section-gap-desktop);
+    padding-bottom: var(--space-section-gap-desktop);
+  }
+}
+
+.cta-inner {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-stack-lg);
+}
+
+.cta-title {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 800;
+}
+
+@media (min-width: 768px) {
+  .cta-title {
+    font-size: 3.5rem; /* 56px */
+  }
+}
+
+.cta-lede {
+  font-size: var(--fs-body-lg);
+  color: var(--color-on-surface-variant);
+  max-width: 560px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-gutter);
+  margin-top: var(--space-stack-md);
+}
+
+@media (min-width: 640px) {
+  .contact-links {
+    flex-direction: row;
+  }
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background-color: var(--color-surface);
+  border: 1px solid rgba(199, 197, 210, 0.2);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  justify-content: center;
+  transition:
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+@media (min-width: 640px) {
+  .contact-link {
+    width: auto;
+  }
+}
+
+.contact-link:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.contact-link .material-symbols-outlined {
+  color: var(--color-primary);
+}
+
+.contact-link__label {
+  font-size: var(--fs-label-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/*SIGNATURE STRIP + FOOTER*/
+.signature-strip {
+  width: 100%;
+  padding: 48px var(--space-edge-margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-stack-md);
+  color: var(--color-on-surface-variant);
+  border-top: 1px solid rgba(199, 197, 210, 0.1);
+}
+
+@media (min-width: 768px) {
+  .signature-strip {
+    flex-direction: row;
+  }
+}
+
+.signature-strip p {
+  font-size: var(--fs-label-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.signature-strip__note {
+  color: rgba(22, 22, 100, 0.6);
+}
+
+.site-footer {
+  width: 100%;
+  background-color: var(--color-surface-container-lowest);
+  border-top: 1px solid rgba(199, 197, 210, 0.1);
+  padding: 32px var(--space-edge-margin);
+}
+
+.site-footer__inner {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-stack-md);
+}
+
+@media (min-width: 768px) {
+  .site-footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.site-footer__copy {
+  font-size: var(--fs-label-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-on-surface-variant);
+}
+
+.site-footer__links {
+  display: flex;
+  gap: var(--space-gutter);
+}
+
+.site-footer__links a {
+  font-size: var(--fs-label-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-on-surface-variant);
+  transition: color 0.2s ease;
+}
+
+.site-footer__links a:hover {
+  color: var(--color-primary);
+}
