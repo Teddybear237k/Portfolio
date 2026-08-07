@@ -26,20 +26,6 @@
   --color-outline: #777682;
   --color-outline-variant: #c7c5d2;
 
-  /*
-    Spacing scale — base unit is 8px, every value below is a multiple of it
-    (8, 16, 24, 32, 80, 160). An 8px base is the common "8pt grid" convention:
-    it divides evenly into common screen widths/heights, every value lines up
-    with every other value with no fractional pixels, and it's small enough
-    to give fine control (an 8px step) without needing a huge token list.
-    Two tiers exist on purpose:
-      - stack-sm/md/lg (8/16/32) for spacing INSIDE a component (icon-to-label
-        gaps, card internal padding)
-      - gutter/edge-margin/section-gap (24/32/80/160) for spacing BETWEEN
-        components and page sections, which needs to read as clearly larger
-        than internal spacing so the eye can tell "this is a new section" vs
-        "this is still the same card"
-  */
   --space-mobile-margin: 16px;
   --space-edge-margin: 32px;
   --space-gutter: 24px;
@@ -55,22 +41,6 @@
   --radius-xl: 0.5rem;
   --radius-full: 0.75rem;
 
-  /*
-    Type scale — values are in rem, not px, so they scale with the user's
-    browser/OS font-size preference (px is an absolute unit and ignores that
-    setting entirely; rem is relative to the root <html> font-size, which is
-    exactly the value a browser's "font size" accessibility setting changes).
-    1rem = 16px is the browser default, so this list is just each pixel
-    value below divided by 16.
-
-    Note: this is NOT a strict mathematical ratio (e.g. a consistent 1.25
-    "Major Third" step) — the jumps between steps vary (roughly 1.1x-1.5x)
-    because each size was picked for its specific use case (button label vs.
-    card title vs. hero headline) rather than generated formulaically. If you
-    want a provably consistent scale later, pick one ratio and regenerate
-    every step from the 1rem base — right now it's a hand-tuned scale that
-    happens to read as reasonably progressive, not a formula.
-  */
   --fs-label-sm: 0.6875rem; /* 11px */
   --fs-label-md: 0.75rem; /* 12px */
   --fs-body-sm: 0.875rem; /* 14px */
@@ -117,6 +87,13 @@ img {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-lg);
 }
 
 /* Hide scrollbars visually while keeping the page scrollable — purely an aesthetic choice carried over from the original design. */
